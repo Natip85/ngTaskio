@@ -1,1 +1,3 @@
-<button (click)="doSomething('hello')" class="btn btn-success"><i class="bi bi-alarm"></i></button>
+<button (click)="doSomething('hello')" class="btn btn-light">
+    <i [ngClass]="icon" class="bi text-primary"></i>
+</button>

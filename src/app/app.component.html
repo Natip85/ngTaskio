@@ -1,38 +1,55 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Task IO</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand text-primary" href="#">Task IO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+            </ul>
+            <!-- <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+        </div>
     </div>
-  </div>
 </nav>
 
 <main class="p-4 main-bg">
-  
-  <p>{{ title | titlecase }}</p>
+    <!-- <p> {{ title | titlecase }} </p>
+    <img [src]="getImagePath()"> -->
 
-  <img [src]="getImagePath()" alt="">
+    <h1 class="text-center mb-3">
+        Today's Tasks
+        <span [ngClass]="listStatusCss()">({{tasks.length}})</span>
+        <br>
+        <small>{{ today | date }}</small>
+    </h1>
 
-<h1 class="text-center"> Today's Tasks <br> <small> {{ today | date }} </small> </h1>
+    <ul class="list-group">
+        <li *ngFor="let task of tasks" [ngClass]="completedCss(task)"
+            class="list-group-item d-flex justify-content-between align-items-center">
+            {{task.title | titlecase}}
+            <div>
+                <app-button [icon]="'bi-pencil'"></app-button>
+                <app-button [icon]="'bi-check-lg'" *ngIf="!task.complete"></app-button>
+            </div>
 
-  <ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    {{getTaskById(0)}} <app-button></app-button> 
-  </li>
+        </li>
+    </ul>
 
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    {{getTaskById(1)}} <app-button></app-button> 
-  </li>
+    <h2>My Projects</h2>
 
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    {{getTaskById(2)}} <app-button></app-button> 
-  </li>
-</ul>
+    <div class="row">
+        <app-project-card *ngFor="let project of projects" [projectItem]="project"></app-project-card>
+    </div>
+
+
+    <div>
+        <app-footer [developerName]="myName"></app-footer>
+    </div>
 </main>
