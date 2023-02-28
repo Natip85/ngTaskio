@@ -1,6 +1,4 @@
 import { Component, Input } from '@angular/core';
-// import { DevName } from '../app.component'
-
 
 
 @Component({
@@ -10,9 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 
 export class FooterComponent {
-  @Input() developerName = {
-    name: ''
-  }
-
   currentDate = new Date()
+
+  @Input() developerName: string = ''
+
 }
